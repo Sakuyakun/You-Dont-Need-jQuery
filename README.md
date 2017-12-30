@@ -688,26 +688,26 @@ In place of common selectors like class, id or attribute we can use `document.qu
   ```js
   // jQuery
   $(`<ol>
-  <li>a</li>
-  <li>b</li>
-</ol>
-<ol>
-  <li>c</li>
-  <li>d</li>
-</ol>`);
+    <li>a</li>
+    <li>b</li>
+  </ol>
+  <ol>
+    <li>c</li>
+    <li>d</li>
+  </ol>`);
 
   // Native
-range = document.createRange();
-parse = range.createContextualFragment.bind(range);
+  range = document.createRange();
+  parse = range.createContextualFragment.bind(range);
 
-parse(`<ol>
-  <li>a</li>
-  <li>b</li>
-</ol>
-<ol>
-  <li>c</li>
-  <li>d</li>
-</ol>`);
+  parse(`<ol>
+    <li>a</li>
+    <li>b</li>
+  </ol>
+  <ol>
+    <li>c</li>
+    <li>d</li>
+  </ol>`);
   ```
 
 
@@ -849,9 +849,7 @@ Most of utilities are found by native API. Others advanced functions could be ch
 
   // Native
   function isNumeric(value) {
-    var type = typeof value;
-
-    return (type === 'number' || type === 'string') && !Number.isNaN(value - Number.parseFloat(value));
+    return !isNaN(parseFloat(n)) && isFinite(n);
   }
   ```
 
@@ -1006,6 +1004,14 @@ Most of utilities are found by native API. Others advanced functions could be ch
   // But concat function doesn't remove duplicate items.
   function merge(...args) {
     return [].concat(...args)
+  }
+
+  // ES6-way, doesn't remove duplicate items.
+  array1 = [...array1, ...array2]
+
+  // Set version, can remove duplicate items
+  function merge(...args) {
+    return Array.from(new Set([].concat(...args)))
   }
   ```
 
